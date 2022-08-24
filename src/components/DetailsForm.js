@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Box, Container, Typography, Grid, TextField, RadioGroup, FormLabel, FormControlLabel, Radio} from '@mui/material';
 import React from 'react'
 
@@ -51,6 +52,16 @@ const DetailsForm = () => {
       
       </Box>
     </Container>
+=======
+import React from 'react'
+
+const DetailsForm = () => {
+    console.log("rbfhrb");
+  return (
+    <div>
+      <h1>In Add Product Details Form</h1>
+    </div>
+>>>>>>> d862b82f25a789ccbdc5c551679f42f30573bd7a
   )
 }
 
