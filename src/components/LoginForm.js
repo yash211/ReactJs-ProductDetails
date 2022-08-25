@@ -31,6 +31,9 @@ const LoginForm = (props) => {
   }
 
   //handle change
+  const handleInput=(e)=>{
+    setUserdet({...userdet,[e.target.name]:e.target.value});
+  } 
 
   return (
     <Container maxWidth="xs">
@@ -45,24 +48,24 @@ const LoginForm = (props) => {
         <form onSubmit={e=>{submitDetails(e)}} style={{marginTop:2}}>
           <Grid container spacing={2}>
             <Grid item sm={12} xs={6}>
-                <TextField fullWidth variant="outlined" label="First Name" value={userdet.name} onChange={(e)=>setUserdet({...userdet,name:e.target.value})} required/>
+                <TextField fullWidth variant="outlined" label="First Name" value={userdet.name} onChange={handleInput} name="name" required/>
             </Grid>
             <Grid item sm={12} xs={6}>
-              <TextField fullWidth variant="outlined" label="Email" value={userdet.email} onChange={(e)=>setUserdet({...userdet,email:e.target.value})} required/>
+              <TextField fullWidth variant="outlined" label="Email" value={userdet.email} onChange={handleInput} name="email" required/>
               {
                 (props.err.EmailError!=="")?<Alert severity="error">{props.err[0]}</Alert>:""
               }
             </Grid>
             <Grid item sm={12} xs={6}>
-              <TextField fullWidth variant="filled" label="Password" value={userdet.password} onChange={(e)=>setUserdet({...userdet,password:e.target.value})} required/>
+              <TextField fullWidth variant="filled" label="Password" value={userdet.password} onChange={handleInput} name="password" required/>
               {
                 (props.err.PassError!=="")?<Alert severity="error">{props.err[1]}</Alert>:""
               }
             </Grid>
             <Grid item sm={12} xs={6}>
-              <TextField fullWidth variant="standard" label="ConfrimPassword" value={userdet.confirmPassword} onChange={(e)=>setUserdet({...userdet,confirmPassword:e.target.value})} required/>
+              <TextField fullWidth variant="standard" label="ConfrimPassword" value={userdet.confirmPassword} onChange={handleInput} name="confirmPassword" required/>
               {
-                (props.err.Cpass!=="")?<Alert severity="error">{props.err[2]}</Alert>:""
+                (props.err.Cpass!=="")?<Alert severity="error">{props.err.Cpass}</Alert>:""
               }
             </Grid>
             <Button sx={{
