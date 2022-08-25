@@ -11,28 +11,45 @@ const LoginForm = (props) => {
     confirmPassword:"",
   });
   
+  const [errors,setError]=useState({
+    EmailError:"",
+    PassError:"",
+    Cpass:"",
+  });
   
   const submitDetails=(e)=>{
-    //console.log("I am here");
     e.preventDefault();
-    var emailerror="",passerror="",cpasserror="";
-    const validEmail=RegExp('^[a-zA-Z0-9]+@[a-zA-Z]+[.a-zA-Z]+$');
-    const validPass=RegExp('^[0-9]');
-    if(!validEmail.test(userdet.email)){
-        emailerror="Email is incorrect";
-    }
-    if(!validPass.test(userdet.password) || userdet.password.length>6){
-      passerror="Password is Incorrect";
-    }
-    if(userdet.password!==userdet.confirmPassword){
-      cpasserror="Confirm Password and Password should be same";
-    }
-    props.add(userdet,emailerror,passerror,cpasserror);
+    props.add(userdet);
   }
+
+  const validEmail=RegExp('^[a-zA-Z0-9]+@[a-zA-Z]+[.a-zA-Z]+$');
+  const validPass=RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/);
 
   //handle change
   const handleInput=(e)=>{
     setUserdet({...userdet,[e.target.name]:e.target.value});
+    if(e.target.name==="email"){
+      if(!validEmail.test(userdet.email)){
+        setError({...errors,EmailError:"Email is incorrect"})
+      }else{
+        setError({...errors,EmailError:""})
+      }
+    }
+    else if(e.target.name==="password"){
+      if(!validPass.test(userdet.password)){
+        setError({...errors,PassError:"Password is incorrect"})
+      }else{
+        setError({...errors,PassError:""})
+      }
+    }else{
+      if(userdet.password===userdet.confirmPassword){
+        setError({...errors,Cpass:""})
+        
+      }else{
+        setError({...errors,Cpass:"Confirm Password and Password should be same"}) 
+      }
+    }
+    console.log(errors);
   } 
 
   return (
@@ -52,21 +69,15 @@ const LoginForm = (props) => {
             </Grid>
             <Grid item sm={12} xs={6}>
               <TextField fullWidth variant="outlined" label="Email" value={userdet.email} onChange={handleInput} name="email" required/>
-              {
-                (props.err.EmailError!=="")?<Alert severity="error">{props.err[0]}</Alert>:""
-              }
+              <Typography variant="string" color="error">{errors.EmailError}</Typography>
             </Grid>
             <Grid item sm={12} xs={6}>
-              <TextField fullWidth variant="filled" label="Password" value={userdet.password} onChange={handleInput} name="password" required/>
-              {
-                (props.err.PassError!=="")?<Alert severity="error">{props.err[1]}</Alert>:""
-              }
+              <TextField fullWidth variant="filled" type="password" label="Password" value={userdet.password} onChange={handleInput} name="password" required/>
+              <Typography variant="string" color="error">{errors.PassError}</Typography>
             </Grid>
             <Grid item sm={12} xs={6}>
-              <TextField fullWidth variant="standard" label="ConfrimPassword" value={userdet.confirmPassword} onChange={handleInput} name="confirmPassword" required/>
-              {
-                (props.err.Cpass!=="")?<Alert severity="error">{props.err.Cpass}</Alert>:""
-              }
+              <TextField fullWidth variant="standard" type="password" label="ConfrimPassword" value={userdet.confirmPassword} onChange={handleInput} name="confirmPassword" required/>
+              <Typography variant="string" color="error">{errors.Cpass}</Typography>
             </Grid>
             <Button sx={{
               marginTop:2,
