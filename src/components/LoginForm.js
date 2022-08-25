@@ -10,13 +10,27 @@ const LoginForm = (props) => {
     password:"",
     confirmPassword:"",
   });
-
+  
+  
   const submitDetails=(e)=>{
     //console.log("I am here");
     e.preventDefault();
-    props.add(userdet);
+    var emailerror="",passerror="",cpasserror="";
+    const validEmail=RegExp('^[a-zA-Z0-9]+@[a-zA-Z]+[.a-zA-Z]+$');
+    const validPass=RegExp('^[0-9]');
+    if(!validEmail.test(userdet.email)){
+        emailerror="Email is incorrect";
+    }
+    if(!validPass.test(userdet.password) || userdet.password.length>6){
+      passerror="Password is Incorrect";
+    }
+    if(userdet.password!==userdet.confirmPassword){
+      cpasserror="Confirm Password and Password should be same";
+    }
+    props.add(userdet,emailerror,passerror,cpasserror);
   }
 
+  //handle change
 
   return (
     <Container maxWidth="xs">
