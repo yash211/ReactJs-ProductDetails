@@ -49,7 +49,7 @@ const LoginForm = (props) => {
         setError({...errors,Cpass:"Confirm Password and Password should be same"}) 
       }
     }
-    console.log(errors);
+    //console.log(errors);
   } 
 
   return (
