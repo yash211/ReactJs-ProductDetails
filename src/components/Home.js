@@ -1,17 +1,27 @@
 import { Button, Typography , AppBar, Toolbar} from '@mui/material'
 // import { Routes, Route, Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react';
 import DetailsForm from './DetailsForm';
 import ShowProds from './ShowProds';
-
+import axios from 'axios';
 
 const Home = (props) => {
   
   const [prodDetail,setproDetails]=useState([]);
 
+  useEffect(() =>{
+    const getProducts = async () => {
+      const response = await axios.get('http://localhost:3030/products');
+      console.log(response);
+      setproDetails(response.data);
+    };
+    getProducts();
+  },[])
+
   const [OnAdd,setOnAdd]=useState("");
   const OnLogout=()=>{
+    axios.delete('http://localhost:3030/products/[1,2]');
     props.logout();
   }
 

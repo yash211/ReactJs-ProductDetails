@@ -1,7 +1,7 @@
 import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,ListItemText,Grid, Typography, Button} from '@mui/material';
 import { Container } from '@mui/system';
 import Details from './Details';
-import { useState } from 'react';
+import { useState} from 'react';
 const ShowProds = (props) => {
   const [detClick,setdetClick]=useState([])
   const onDetClick=(e,dname,dprice,dtype,ditems)=>{
@@ -24,6 +24,7 @@ const ShowProds = (props) => {
               <TableCell align="right">Product Type</TableCell>
               <TableCell align="right">Items List</TableCell>
               <TableCell align="center">Info</TableCell>
+              <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -47,6 +48,9 @@ const ShowProds = (props) => {
                 }</TableCell>
                 <TableCell align="center">
                   <Button onClick={(e)=>onDetClick(e,row.name,row.price,row.ptype,row.pitems)}color="success" variant="contained">Details</Button>
+                </TableCell>
+                <TableCell align="center">
+                  <Button color="error" variant="contained">Delete</Button>
                 </TableCell>
               </TableRow>
             ))}

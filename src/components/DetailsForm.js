@@ -1,6 +1,6 @@
 import {Button,ListItemIcon,Box,ListItemText, InputLabel, Container, Typography, Grid, TextField, RadioGroup, FormLabel, FormControlLabel, Radio, Checkbox, Select, MenuItem, OutlinedInput} from '@mui/material';
 import { useState } from 'react';
-
+import axios from 'axios';
 
 
 const DetailsForm = (props) => {
@@ -20,12 +20,7 @@ const DetailsForm = (props) => {
   ];
 
   //const [RadioSelect,setRadioSelect]=useState("")
-  const [prodDetails,setprodDetails]=useState([{
-    name:"",
-    price:0,
-    ptype:"",
-    pitems:[],
-  }]);
+  const [prodDetails,setprodDetails]=useState([]);
   
   const [check,setfcheck]=useState(false)
   const [selected,setSelect]=useState([])
@@ -38,6 +33,7 @@ const DetailsForm = (props) => {
   const submitDetails=(e)=>{
     e.preventDefault();
     setprodDetails(prodDetails);
+    axios.post('http://localhost:3030/products',prodDetails);
     props.addDetails(prodDetails);
     setprodDetails([]);
   }
