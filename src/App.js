@@ -4,13 +4,16 @@ import { Routes, Route, Link } from "react-router-dom";
 import LoginForm from './components/LoginForm';
 import Home from './components/Home';
 
-import { useState } from 'react';
+import { useState,createContext } from 'react';
 // import { Alert, Snackbar } from '@mui/material';
 // import { useNavigate } from "react-router-dom";
 
+//contextAPI is basicly used to provide props to hierarchy components
+export const ReqContext=createContext();
 
 function App() {
-
+  
+  
   const [users,setUsers]=useState({
     fname:"",
     email:"",
@@ -32,12 +35,14 @@ function App() {
     });
   }
   return (
-    <div>
+    <div> 
       {
-        (users.email!=="")?  
-        <Home user={users} logout={logout}/>
-        : 
-        <LoginForm add={adduser}/>
+          (users.email!=="")? 
+          <ReqContext.Provider value={users}>
+            <Home logout={logout}/>
+          </ReqContext.Provider>
+            : 
+          <LoginForm add={adduser}/>  
       }
     </div>
 
