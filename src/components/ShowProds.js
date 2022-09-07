@@ -2,11 +2,19 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,ListIt
 import { Container } from '@mui/system';
 import Details from './Details';
 import { useState} from 'react';
+import axios from 'axios';
 const ShowProds = (props) => {
+
   const [detClick,setdetClick]=useState([])
   const onDetClick=(e,dname,dprice,dtype,ditems)=>{
     e.preventDefault();
     setdetClick([dname,dprice,dtype,ditems]);
+  }
+
+  //Delete
+  const Ondelete=(e,id)=>{
+    e.preventDefault();
+    props.del(id);
   }
   return (
     <div> 
@@ -50,7 +58,7 @@ const ShowProds = (props) => {
                   <Button onClick={(e)=>onDetClick(e,row.name,row.price,row.ptype,row.pitems)}color="success" variant="contained">Details</Button>
                 </TableCell>
                 <TableCell align="center">
-                  <Button color="error" variant="contained">Delete</Button>
+                  <Button onClick={(e)=>Ondelete(e,row.id)}  color="error" variant="contained">Delete</Button>
                 </TableCell>
               </TableRow>
             ))}

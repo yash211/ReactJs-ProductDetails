@@ -1,44 +1,14 @@
 {
   "products": [
     {
-      "name": "Adida",
-      "price": "232",
-      "ptype": "Sports",
-      "pitems": [
-        "Tennis bat",
-        "Cricket bat"
-      ],
-      "id": 2
-    },
-    {
-      "name": "FBB",
-      "price": "4545",
-      "ptype": "Clothes",
-      "pitems": [
-        "T-Shirts",
-        "Pants"
-      ],
-      "id": 3
-    },
-    {
-      "name": "gyh",
-      "price": "4354",
+      "name": "Testing ",
+      "price": "65545",
       "ptype": "Sports",
       "pitems": [
         "Tennis bat",
         "Cricket bat"
       ],
       "id": 4
-    },
-    {
-      "name": "huwgs",
-      "price": "57656",
-      "ptype": "Electronics",
-      "pitems": [
-        "Laptop",
-        "Washing Machine"
-      ],
-      "id": 5
     }
   ]
 }

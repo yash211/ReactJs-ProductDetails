@@ -23,6 +23,12 @@ const Home = (props) => {
     getProducts();
   }, [])
 
+  const deleteItems=(id)=>{
+    //e.preventDefault();
+    axios.delete(`http://localhost:3030/products/${id}`)
+    setproDetails(prodDetail.filter((items) => items.id!==id));
+  }
+
   const [OnAdd, setOnAdd] = useState("");
   const OnLogout = () => {
     //axios.delete('http://localhost:3030/products/[1,2]');
@@ -53,7 +59,7 @@ const Home = (props) => {
 
       {
         (OnAdd === "true") ?
-          <DetailsForm addDetails={addDetHandler} /> : <ShowProds ProductList={prodDetail} />
+          <DetailsForm addDetails={addDetHandler} /> : <ShowProds ProductList={prodDetail} del={deleteItems} />
       }
     </div>
   )
